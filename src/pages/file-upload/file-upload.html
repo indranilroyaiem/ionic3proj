@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Upload File
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="closeModal()">
+        <span ion-text color="primary" showWhen="ios,core">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+  <ion-item>
+  <input type="file" name ="file" multiple (change)="uploadWebFile($event)" placeholder="upload a from web file">
+  </ion-item>
+</ion-content>

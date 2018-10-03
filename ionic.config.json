@@ -1,0 +1,20 @@
+{
+  "name": "Jira Asset Companion",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "26c7209c",
+  "proxies": [
+    {
+      "path": "/rest/api/2",
+      "proxyUrl": "https://issuetracking.bsh-sdd.com/rest/api/latest/"
+    },
+    {
+      "path": "/images/upload",
+      "proxyUrl": "http://13.233.132.85:8080/images/upload"
+    }
+  ]
+}
+
+

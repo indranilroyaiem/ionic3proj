@@ -1,0 +1,20 @@
+<ion-content padding no-bounce class="login">
+  <ion-grid>
+    <ion-row class="centering">
+      <ion-col>
+          <img class="jira-logo" src="assets/imgs/bshlogo.png"/>
+          <p class="header">Facilities</p>
+          <form [formGroup]="form" (submit)="onLoginSubmit()">
+            <p class="errors">{{errors}}</p>
+            <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
+            <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+            <ion-item>
+              <ion-label>Save Login</ion-label>
+              <ion-checkbox formControlName="remember"></ion-checkbox>
+            </ion-item>
+            <button ion-button full class="login-button" type="submit">Log in</button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

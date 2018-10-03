@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+      <ion-title>Search</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+        <form [formGroup]="form" (submit)="submitSearch()">
+          <ion-card>
+          <ion-input formControlName="assetNum" type="text" placeholder="AF"></ion-input>
+          <button ion-button type="submit">Search for Task</button>
+          </ion-card>
+        </form>
+        <!--{{data}}-->
+  <ion-card>
+        <ion-list>
+          <ion-navbar>
+            <ion-title text-left>Tasks Created</ion-title>
+          </ion-navbar>
+          <ion-item *ngFor="let issue of issues" (click)="changepage(issue.key)">
+            <h2>{{issue.key}}</h2>
+            <p>{{issue.fields.issuetype.name}}</p>
+            <ion-icon name='ios-arrow-forward' item-end></ion-icon>
+          </ion-item>
+        </ion-list>
+  </ion-card>
+  <ion-fab bottom right>
+    <button ion-fab (click)="openModal()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

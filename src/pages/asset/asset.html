@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{issue?.key}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <p style="font-weight: bold">Description: {{issue?.fields.summary}}</p>
+  <p *ngIf="issue.fields.assignee">Assignee: {{issue?.fields.assignee.displayName}}</p>
+  <p class="issueType">Type: <img src="{{issue?.fields.issuetype.iconUrl}}" alt=""> {{issue?.fields.issuetype.name}}</p>
+  <p>Status: <ion-badge color="{{lozengeColor}}">{{issue?.fields.status.name.toUpperCase()}}</ion-badge></p>
+  <p><ion-badge *ngFor="let label of issue.fields.labels">{{label}}</ion-badge></p>
+
+  <ion-segment padding [(ngModel)]="issueDetails" color="primary">
+    <ion-segment-button value="basics">Task Info</ion-segment-button>
+    <!--<ion-segment-button value="hardwareDetails">Hardware Details</ion-segment-button>-->
+    <ion-segment-button value="screenDetails" *ngIf="issueType == 'Monitor/TV'">Screen Details</ion-segment-button>
+    <ion-segment-button value="projectorDetails" *ngIf="issueType == 'Projector'">Projector Details</ion-segment-button>
+    <ion-segment-button value="printerDetails" *ngIf="issueType == 'Printer'">Printer Details</ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="issueDetails">
+    <ion-item-group *ngSwitchCase="'basics'">
+      <ion-item>Description: {{issue?.fields.summary}}</ion-item>
+      <ion-item>Type: {{issue?.fields.issuetype.name}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10300">Hostname: {{issue?.fields.customfield_10300}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10500">{{issue?.fields.customfield_10500?.value}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10101">Location: {{issue?.fields.customfield_10101?.value}} - {{issue?.fields.customfield_10101?.child?.value}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10105">Room Number: {{issue?.fields.customfield_10105}}</ion-item>
+    </ion-item-group>
+    <ion-item-group *ngSwitchCase="'hardwareDetails'">
+      <ion-item *ngIf="issue.fields.customfield_10306">Manufacturer: {{issue?.fields.customfield_10306}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10307">Model: {{issue?.fields.customfield_10307}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10102">Serial Number: {{issue?.fields.customfield_10102}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10308">CPU Model: {{issue?.fields.customfield_10308}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10304">RAM: {{issue?.fields.customfield_10304}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10305">HDD Size: {{issue?.fields.customfield_10305}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10309">Graphics Card: {{issue?.fields.customfield_10309}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10312">LAN MAC Address: {{issue?.fields.customfield_10312}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10313">WLAN MAC Address: {{issue?.fields.customfield_10313}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10303">
+        Device Ports: <ion-badge *ngFor="let item of issue.fields.customfield_10303">{{item}}</ion-badge>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group *ngSwitchCase="'screenDetails'">
+      <ion-item *ngIf="issue.fields.customfield_10106">Screen Size: {{issue?.fields.customfield_10106}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10301">Aspect Ratio: {{issue?.fields.customfield_10301?.value}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10302">Native Resolution: {{issue?.fields.customfield_10302?.value}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10310">Current Connection: {{issue?.fields.customfield_10310?.value}}</ion-item>
+    </ion-item-group>
+
+    <ion-item-group *ngSwitchCase="'projectorDetails'">
+      <ion-item *ngIf="issue.fields.customfield_10314">Lamp Model: {{issue?.fields.customfield_10314}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10315">Lamp Life: {{issue?.fields.customfield_10315}}</ion-item>
+    </ion-item-group>
+
+    <ion-item-group *ngSwitchCase="'printerDetails'">
+      <ion-item *ngIf="issue.fields.customfield_10317">Type of Ink/Toner: {{issue?.fields.customfield_10317}}</ion-item>
+      <ion-item *ngIf="issue.fields.customfield_10316">Number of Trays: {{issue?.fields.customfield_10316}}</ion-item>
+    </ion-item-group>
+  </div>
+
+  <h4 padding>Comments</h4>
+  <ion-card *ngFor="let comment of issue.fields.comment.comments">
+      <ion-card-header>
+        {{comment.author.displayName}} ({{parseDate(comment.created)}})
+      </ion-card-header>
+      <ion-card-content>
+        {{comment.body}}
+      </ion-card-content>
+    </ion-card>
+</ion-content>

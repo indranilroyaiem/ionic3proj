@@ -1,0 +1,65 @@
+page-login {
+
+  .login {
+    background: #0052cc;
+  }
+
+  .login-button {
+    background: #0065ff;
+    font-weight: bold;
+  }
+
+  ion-grid {
+    height: 100%;
+    max-width: 40rem;
+  }
+
+  .centering {
+    height: 100%;
+    align-content: center;
+    align-items: center;
+  }
+
+  .header {
+    text-align: center;
+    font-size: 4rem;
+    color: #fff;
+  }
+
+  .md, .header {
+    text-align: center;
+    font-size: 3rem;
+    color: #fff;
+  }
+
+  .errors {
+    color: red;
+    text-align: center;
+  }
+
+  ion-input {
+    background: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+  }
+
+  ion-item {
+    margin-bottom: 30px !important;
+  }
+
+  .jira-logo {
+    margin: auto;
+    display: block;
+    height: 200px;
+    width: 180px;
+  }
+
+  .md, .jira-logo {
+    margin: auto;
+    display: block;
+    height: 100px;
+    width: 200px;
+  }
+}

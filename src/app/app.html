@@ -1,0 +1,15 @@
+<ion-menu [content]="mycontent" id="profile-menu">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="menu">
+    <p>{{user?.displayName}}</p>
+    <form (submit)="onLogoutSubmit()">
+      <button ion-button type="submit">Log out</button>
+    </form>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
